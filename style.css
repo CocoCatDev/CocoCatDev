@@ -1,0 +1,46 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+body {
+    display: flex;
+    flex-direction: column; /* empile verticalement */
+    justify-content: flex-start; /* commence depuis le haut par défaut */
+    align-items: center; /* centre horizontalement */
+    padding-top: 30vh; /* pousse le début de la pile vers le centre vertical */
+     border: 4px solid #FF5733; /* épaisseur + couleur */
+     padding: 10px;   
+
+  }
+
+.element {
+    margin: 10px 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+    width: 200px;
+    text-align: center;
+  }
+.titre1 {
+    font-size: 50px;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.nav_dessus {
+    background-image: url('coco.png');
+     border: 4px solid #FF5733; /* épaisseur + couleur */
+    padding: 10px;   
+
+}
+.par {
+    background-color: aqua;
+     border: 4px solid #FF5733; /* épaisseur + couleur */
+    padding: 10px;   
+}
+.yt {
+    background-color: white;
+     border: 4px solid #FF5733; /* épaisseur + couleur */
+    padding: 10px;   
+}
