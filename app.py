@@ -78,7 +78,8 @@ def repos():
 
 @app.route("/repos_html")
 def redirige():
-    return redirect(url_for('repos'))
+    repos = get_github_repos()
+    return render_template("repos.html",repos=repos)
 
 
 
