@@ -76,12 +76,6 @@ def repos():
 
     return jsonify(result)
 
-@app.route("/repos_html")
-def redirige():
-    repos = get_github_repos()
-    return render_template("repos.html",repos=repos)
-
-
 
 
 
