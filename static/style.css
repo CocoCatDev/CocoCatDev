@@ -44,3 +44,33 @@ a {
      border: 4px solid #FF5733; /* épaisseur + couleur */
     padding: 10px;   
 }
+
+.custom-list {
+  list-style-type: none; /* supprime les puces par défaut */
+  padding-left: 0;       /* retire le padding si nécessaire */
+}
+
+.custom-list .l1::before {
+  content: "✅✅✅";       /* caractère personnalisé */
+  margin-right: 8px;  /* espace entre le caractère et le texte */
+}
+.custom-list .l3::before {
+  content: "✅✅✅";       /* caractère personnalisé */
+  margin-right: 8px
+}
+.custom-list .l4::before {
+  content: "✅✅✅";       /* caractère personnalisé */
+  margin-right: 8px
+}
+.custom-list .l5::before {
+  content: "✅✅✅";       /* caractère personnalisé */
+  margin-right: 8px
+}
+.custom-list .l2::before {
+    content: "✅";
+    margin-right: 8px;
+}
+.custom-list .l6::before {
+    content: "✅✅";
+    margin-right: 8px;
+}

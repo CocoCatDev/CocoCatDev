@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="'fr">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
-    <tltle>Coco Cat Dev | page principale</tltle>
+    <title>Coco Cat Dev | page principale</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <nav class="nav_dessus">
         <h1 class="titre1">Bienvenue sur le site de CocoCatDev</h1>
-
-
-        <p class="l1">HTML/CSS</p>
-        <p class="l2">JavaScript</p>
-        <p class="l3">Python</p>
-        <p class="l4">Pygame</p>
-        <p class="l5">Tkinter</p>
+        
+    <ul class="custom-list">
+        <li class="l1">HTML/CSS</li>
+        <li class="l2">JavaScript</li>
+        <li class="l3">Python</li>
+        <li class="l4">Pygame</li>
+        <li class="l5">Tkinter</li>
+        <li class="l6">Langage C</li>
+    </ul>
+ 
 
         <button type="submit"><a href="{{ url_for('contact') }}">Contact</a></button>
 
@@ -42,7 +45,7 @@
 </div>
 
 
-        <p>Voici le super message !}</p>
+        <p>Voici le super message !</p>
 
         {% for content in contenus %}
             <p>
