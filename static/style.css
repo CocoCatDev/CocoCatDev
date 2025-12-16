@@ -73,3 +73,17 @@ a {
     content: "✅✅";
     margin-right: 8px;
 }
+list .li1::before {
+  content: "💻";
+  margin-right: 8px;
+
+}
+
+list .li2::before{
+  content:"🤖";
+  margin-right:8px;
+}
+list .li3::before{
+  content: "📱";
+  margin-right:8px;
+}
