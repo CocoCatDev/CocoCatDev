@@ -6,7 +6,7 @@
 
 <header>
     <h1>Bienvenue sur le site de CocoCatDev</h1>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
 
 </header>
 
@@ -20,6 +20,7 @@
         <li class="l6">Langage C</li>
     </ul>
     <button type="submit"><a href="{{ url_for('contact') }}">Contact</a></button>
+    <button type="submit"><a href="{{   url_for('redirige'  )}}">Mes repos</a></button>
 </nav>
 
 <div class="par">
@@ -39,12 +40,14 @@ Sinon, je suis débutant en dev web. Je connais bien les toutes bases.</p>
 </div>
 
 <p>Voici le super message !</p>
+
+
 <hr>
 
 {% for content in contenus %}
     <p>{{ content[0] }}</p>
 {% endfor %}
 
-<br>
+<hr>
 
 {% endblock %}

@@ -76,6 +76,10 @@ def repos():
 
     return jsonify(result)
 
+@app.route("/repos")
+def redirige():
+    return redirect(url_for('repos.html'))
+
 
 
 
