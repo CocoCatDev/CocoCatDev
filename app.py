@@ -1,9 +1,11 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, jsonify
 import sqlite3
+import requests
 
 app = Flask(__name__)
 
 DATABASE = 'test.db'
+
 
 def init_db():
     conn = sqlite3.connect('test.db')
@@ -15,6 +17,8 @@ def init_db():
     conn.close()
 
 init_db()
+
+GITHUB_USER = "CocoCatDev"
 
 @app.route('/')
 def index():
@@ -40,9 +44,37 @@ def contact():
         
 
         return redirect(url_for('index'))
-    
-    
 
+
+
+@app.route("/api/repos")  # ← exactement ce chemin
+def repos():
+    url = "https://api.github.com/users/CocoCatDev/repos"
+    headers = {"Accept": "application/vnd.github+json"}
+
+    try:
+        response = requests.get(url, headers=headers, timeout=5)
+    except requests.RequestException as e:
+        return jsonify({"error": str(e)}), 500
+
+    if response.status_code != 200:
+        return jsonify({"error": "Impossible de récupérer les repos"}), 500
+
+    repos = response.json()
+    filtered_repos = [r for r in repos if not r["fork"]]
+
+    result = [
+        {
+            "name": r["name"],
+            "html_url": r["html_url"],
+            "stargazers_count": r["stargazers_count"],
+            "description": r.get("description", ""),
+            "language": r.get("language", "")
+        }
+        for r in filtered_repos
+    ]
+
+    return jsonify(result)
 
 
 

@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>Coco Cat Dev | page principale</title>
+{% extends "base.html" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+
+<header>
+    <h1>Bienvenue sur le site de CocoCatDev</h1>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <nav class="nav_dessus">
-        <h1 class="titre1">Bienvenue sur le site de CocoCatDev</h1>
-        
+
+</header>
+
+<nav class="nav_dessus">
     <ul class="custom-list">
         <li class="l1">HTML/CSS</li>
         <li class="l2">JavaScript</li>
@@ -17,43 +19,32 @@
         <li class="l5">Tkinter</li>
         <li class="l6">Langage C</li>
     </ul>
- 
+    <button type="submit"><a href="{{ url_for('contact') }}">Contact</a></button>
+</nav>
 
-        <button type="submit"><a href="{{ url_for('contact') }}">Contact</a></button>
-
-
-    </nav>
-    <div class="par">
-    <p>Coco, enchanté ! Moi, ce qui m'anime (en dehors des pages web), c'est d'apprendre, plus, encore et<br>
-    encore. Je ne me vois pas vivre un jour et me dire que je sais tout ce que j'ai à savoir. Sur un plan plus<br>
-    léger, j'aime les chats (pas très difficile à deviner), les jeux vidéos, la musique.<br>
-    Je me suis essayé au developpement de jeux vidéos avec Python pygame. C'est quelque chose que j'aime faire<br>
-    dans mon coin. Je suis quelqu'un qui aime la sociabilité, mais qui a aussi un grand besoin de solitidue.<br>
-    Sinon, je suis débutant en dev web. Je connais bien les toutes bases. 
-</p>
+<div class="par">
+    <p>Coco, enchanté ! Moi, ce qui m'anime (en dehors des pages web), c'est d'apprendre, plus, encore et
+encore. Je ne me vois pas vivre un jour et me dire que je sais tout ce que j'ai à savoir. Sur un plan plus
+léger, j'aime les chats (pas très difficile à deviner), les jeux vidéos, la musique.
+Je me suis essayé au developpement de jeux vidéos avec Python pygame. C'est quelque chose que j'aime faire
+dans mon coin. Je suis quelqu'un qui aime la sociabilité, mais qui a aussi un grand besoin de solitidue.
+Sinon, je suis débutant en dev web. Je connais bien les toutes bases.</p>
 </div>
 
 <div class="yt">
-    <h2>Mes YouTubeurs favorits !</h2>
-
-    <p>Quoi de mieux que YouTube pour accentuer sa créativité !</p>
-
-    <a href="https://www.youtube.com/@EvoluNoob">Chaine de Evolunoob ! Parfait pour apprendre à coder ! J'y ai appris le<br>
-    Python notemmant !</a><br>
-    <a href="https://www.youtube.com/@Elparadeponpon">Une chaîne d'exception !</a><br>
-    <a href="https://www.youtube.com/@LeoTechMaker">On ne le présente plus !</a>
+    <h2>Mes YouTubeurs favoris !</h2>
+    <a href="https://www.youtube.com/@EvoluNoob">EvoluNoob</a><br>
+    <a href="https://www.youtube.com/@Elparadeponpon">Elparadeponpon</a><br>
+    <a href="https://www.youtube.com/@LeoTechMaker">LeoTechMaker</a>
 </div>
 
+<p>Voici le super message !</p>
+<hr>
 
-        <p>Voici le super message !</p>
+{% for content in contenus %}
+    <p>{{ content[0] }}</p>
+{% endfor %}
 
-        {% for content in contenus %}
-            <p>
-                {{ content[0] }}
-            </p>
-        {%  endfor  %}
+<br>
 
-
-</body>
-
-</html>
+{% endblock %}
