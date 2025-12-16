@@ -78,7 +78,8 @@ def repos():
 
 @app.route("/repos_html")
 def redirige():
-    return redirect(url_for('repos.html'))
+    return redirect(url_for('repos'))
+
 
 
 
