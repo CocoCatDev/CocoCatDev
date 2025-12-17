@@ -1,10 +1,15 @@
 from flask import Flask, render_template, url_for, request, redirect, jsonify
 import sqlite3
 import requests
+import os
 
 app = Flask(__name__)
+
 DATABASE = 'test.db'
 GITHUB_USER = "CocoCatDev"
+
+# 🔐 Token récupéré UNIQUEMENT depuis l'environnement
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 
 def init_db():
@@ -41,7 +46,10 @@ def contact():
         if contenu:
             with sqlite3.connect(DATABASE) as conn:
                 cur = conn.cursor()
-                cur.execute("INSERT INTO contenu (contenu) VALUES (?)", (contenu,))
+                cur.execute(
+                    "INSERT INTO contenu (contenu) VALUES (?)",
+                    (contenu,)
+                )
                 conn.commit()
         return redirect(url_for('index'))
     return render_template('contact.html')
@@ -50,17 +58,29 @@ def contact():
 @app.route("/api/repos")
 def api_repos():
     """API pour récupérer les repos GitHub non-fork"""
+
+    if not GITHUB_TOKEN:
+        # Sécurité : on ne fait rien sans token
+        return jsonify([])
+
     url = f"https://api.github.com/users/{GITHUB_USER}/repos"
-    headers = {"Accept": "application/vnd.github+json"}
+
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"token {GITHUB_TOKEN}"
+    }
 
     try:
         response = requests.get(url, headers=headers, timeout=5)
         response.raise_for_status()
         repos = response.json()
+
         if not isinstance(repos, list):
-            return jsonify([])  # renvoie toujours un tableau
-    except requests.RequestException as e:
-        return jsonify({"error": str(e)}), 500
+            return jsonify([])
+
+    except requests.RequestException:
+        # ❌ Pas de fuite d'erreur interne
+        return jsonify([])
 
     filtered_repos = [r for r in repos if not r.get("fork")]
 
@@ -69,8 +89,8 @@ def api_repos():
             "name": r.get("name"),
             "html_url": r.get("html_url"),
             "stargazers_count": r.get("stargazers_count", 0),
-            "description": r.get("description", ""),
-            "language": r.get("language", "")
+            "description": r.get("description") or "",
+            "language": r.get("language") or ""
         }
         for r in filtered_repos
     ]
@@ -80,3 +100,4 @@ def api_repos():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
