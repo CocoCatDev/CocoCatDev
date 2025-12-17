@@ -10,10 +10,20 @@ body {
     align-items: center; /* centre horizontalement */
     padding-top: 30vh; /* pousse le début de la pile vers le centre vertical */
      border: 4px solid #FF5733; /* épaisseur + couleur */
-     padding: 10px;   
+     padding: 10px;  
+     font-size: 16px 
 
   }
-
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+}
+@media (min-width: 1024px) {
+  body {
+    font-size: 18px;
+  }
+}
 .element {
     margin: 10px 0;
     padding: 20px;
@@ -28,17 +38,71 @@ a {
     text-decoration: none;
     color: black;
 }
-.nav_dessus {
+#nav_dessus {
      border: 4px solid #FF5733; /* épaisseur + couleur */
     padding: 10px;   
 
 }
-.par {
+/* Mobile */
+.nav_dessus ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+}
+
+.nav_dessus button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  #nav_dessus ul {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  #nav_dessus button {
+    width: auto;
+  }
+}
+#nav_dessus ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+}
+@media (min-width: 768px) {
+  #nav_dessus ul {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  #nav_dessus button {
+    width: auto;
+  }
+}
+#par {
     background-color: aqua;
      border: 4px solid #FF5733; /* épaisseur + couleur */
     padding: 10px;   
 }
-.yt {
+#par p {
+  max-width: 800px;
+  margin: auto;
+  padding: 0 10px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #par p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+#yt {
     background-color: white;
      border: 4px solid #FF5733; /* épaisseur + couleur */
     padding: 10px;   
@@ -89,6 +153,12 @@ list .li3::before{
      border: 4px solid #FF5733; /* épaisseur + couleur */
     padding: 10px;   
 }
+.repo-card {
+  width: 100%;
+  max-width: 500px;
+  margin: 10px auto;
+}
+
 button {
   cursor: pointer;
   background: none;
@@ -102,4 +172,14 @@ button:hover {
 }
 .merki{
   color: red;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(80px) scale(0.95);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }

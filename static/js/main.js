@@ -63,3 +63,15 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(err => console.error("Erreur fetch repos :", err));
 });
+
+document.addEventListener("scroll",() => {
+  document.querySelectorAll(".reveal").forEach(element => {
+    const haut = element.getBoundingClientRect().top;
+    const hauteur_fenetre = window.innerHeight;
+
+    if(haut < hauteur_fenetre - 100){
+      element.classList.add("visible");
+    }
+
+  })
+});

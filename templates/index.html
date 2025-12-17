@@ -10,7 +10,7 @@
 
 </header>
 
-<nav class="nav_dessus">
+<nav class="reveal" id="nav_dessus">
     <ul class="custom-list">
         <li class="l1">HTML/CSS</li>
         <li class="l2">JavaScript</li>
@@ -22,16 +22,20 @@
     <button type="submit"><a href="{{ url_for('contact') }}">Laisse un super message !</a></button>
 </nav>
 
-<div class="par">
-    <p>Coco, enchanté ! Moi, ce qui m'anime (en dehors des pages web), c'est d'apprendre, plus, encore et
-encore. Je ne me vois pas vivre un jour et me dire que je sais tout ce que j'ai à savoir. Sur un plan plus
-léger, j'aime les chats (pas très difficile à deviner), les jeux vidéos, la musique.
-Je me suis essayé au developpement de jeux vidéos avec Python pygame. C'est quelque chose que j'aime faire
-dans mon coin. Je suis quelqu'un qui aime la sociabilité, mais qui a aussi un grand besoin de solitidue.
-Sinon, je suis débutant en dev web. Je connais bien les toutes bases.</p>
+<div class="reveal" id="par">
+    <p>Bonjour ! Moi c'est CocoCatDev, ravi de faire votre connaissance ! Jeune apprenti developpeur <strong>autodidacte</strong>,<br>
+        j'ai créer ce petit site dans l'objectif de m'exercer au developpement web. Ayant commencé la programmation<br>
+        très jeune avec le langage <em>python</em>, j'ai poursuivi mon apprentissage avec le C (quelques bases), et le <strong>JavaScript.</strong><br>
+        Avec python, j'ai appris le concept de POO, à concevoir des applications desktop légères (avec Tkinter), puis des <br>
+        jeux vidéos avec pygame. Plus récemment, j'ai commencé à apprendre le mini-framework Flask avec lequel j'ai développé la partie<br>
+        back-end du présent site Web. Je suis débutant en Javascript, ce site me permet d'apprendre et experimenter. <br>
+        Plus bas, <a style="color:blue; text-decoration: solid;" href="#repos-list">vous pourrez voir mes repository sur GitHub</a>.<br>
+        Cela vous permettra d'explorer mes petits projets en cours.<br> 
+        En terme de passions et hobbies, les choses qui me passionnent (en incluant <strong>(évidemment !)</strong>) l'informatique<br>
+        sont : les animaux, la musique (electro for life) et sinon je m'interesse à des tas de choses ! Je suis très curieux. 
 </div>
 
-<div class="yt">
+<div class="reveal" id="yt">
     <h2>Mes YouTubeurs favoris !</h2>
     <ul class="list">
     <li class="li1"><a href="https://www.youtube.com/@EvoluNoob">EvoluNoob</a></li><br>
@@ -56,7 +60,7 @@ Sinon, je suis débutant en dev web. Je connais bien les toutes bases.</p>
 
 <input type="text" id="recherche" placeholder="Rechercher un repo..." >
 
-<div id="repo-list"></div>
+<div class="reveal" id="repo-list"></div>
 
 
 
