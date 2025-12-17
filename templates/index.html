@@ -1,9 +1,14 @@
-{% extends "base.html" %}
-
-{% block title %}Accueil{% endblock %}
-
-{% block content %}
-
+<!DOCTYPE html>
+<html>
+    <head>
+         <meta charset="UTF-8">
+        <link rel="stylesheet" href="../static/style.css">
+        <title>CocoCatDev</title>
+        <script src="../static/js/main.js" defer></script>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="icon" href="../static/coco.ico.png">
+    </head>
+<body>
 <header>
     <h1>Bienvenue sur le site de CocoCatDev</h1>
     
@@ -19,7 +24,6 @@
         <li class="l5">Tkinter</li>
         <li class="l6">Langage C</li>
     </ul>
-    <button type="submit"><a href="{{ url_for('contact') }}">Laisse un super message !</a></button>
 </nav>
 
 <div class="reveal" id="par">
@@ -27,10 +31,10 @@
         j'ai créer ce petit site dans l'objectif de m'exercer au developpement web. Ayant commencé la programmation<br>
         très jeune avec le langage <em>python</em>, j'ai poursuivi mon apprentissage avec le C (quelques bases), et le <strong>JavaScript.</strong><br>
         Avec python, j'ai appris le concept de POO, à concevoir des applications desktop légères (avec Tkinter), puis des <br>
-        jeux vidéos avec pygame. Plus récemment, j'ai commencé à apprendre le mini-framework Flask avec lequel j'ai développé la partie<br>
-        back-end du présent site Web. Je suis débutant en Javascript, ce site me permet d'apprendre et experimenter. <br>
-        Plus bas, <a style="color:blue; text-decoration: solid;" href="#repos-list">vous pourrez voir mes repository sur GitHub</a>.<br>
-        Cela vous permettra d'explorer mes petits projets en cours.<br> 
+        jeux vidéos avec pygame. Plus récemment, j'ai commencé à apprendre le mini-framework Flask. Je suis débutant en <br>
+        Javascript, ce site me permet d'apprendre et experimenter. <br>
+        
+        
         En terme de passions et hobbies, les choses qui me passionnent (en incluant <strong>(évidemment !)</strong>) l'informatique<br>
         sont : les animaux, la musique (electro for life) et sinon je m'interesse à des tas de choses ! Je suis très curieux. 
 </div>
@@ -44,27 +48,19 @@
     </ul>
 </div>
 
-<p>Voici le super message !</p>
+<footer>
+    <div class="reveal" id="contient">
+    <p id="pp">© <span id="mini-p">2025</span> CocoCatDev. Tous droits réservés.</p>
+    </div>
+
+  
+</footer>
 
 
-<hr>
-
-{% for content in contenus %}
-    <p>{{ content[0] }}</p>
-{% endfor %}
-
-<hr>
-
-
-<h1>Mes repos GitHub</h1>
-
-<input type="text" id="recherche" placeholder="Rechercher un repo..." >
-
-<div class="reveal" id="repo-list"></div>
+</body>
 
 
 
-
-{% endblock %}
+</html>
 
 
