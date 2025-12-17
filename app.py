@@ -3,71 +3,72 @@ import sqlite3
 import requests
 
 app = Flask(__name__)
-
 DATABASE = 'test.db'
+GITHUB_USER = "CocoCatDev"
 
 
 def init_db():
-    conn = sqlite3.connect('test.db')
-    cur = conn.cursor()
+    """Initialise la base de données si elle n'existe pas"""
+    with sqlite3.connect(DATABASE) as conn:
+        cur = conn.cursor()
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS contenu (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                contenu TEXT NOT NULL
+            )
+        """)
+        conn.commit()
 
-    cur.execute("""CREATE TABLE IF NOT EXISTS contenu (id INTEGER PRIMARY KEY AUTOINCREMENT, contenu TEXT NOT NULL)""")
-    
-    conn.commit()
-    conn.close()
 
 init_db()
 
-GITHUB_USER = "CocoCatDev"
 
 @app.route('/')
 def index():
-    conn = sqlite3.connect(DATABASE)
-    cur = conn.cursor()
-    cur.execute("SELECT contenu FROM contenu")
-
-    contenus = cur.fetchall()
-
-    return render_template('index.html',contenus=contenus)
-
-@app.route('/contact',methods=['POST','GET'])
-def contact():
-    if request.method == 'GET':
-        return render_template('contact.html')
-    elif request.method == 'POST':
-        contenu = request.form['contenu']
-        conn = sqlite3.connect(DATABASE)
+    """Page d'accueil affichant le contenu de la base"""
+    with sqlite3.connect(DATABASE) as conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO contenu (contenu) VALUES (?)",(contenu,))
-        conn.commit()
-        conn.close()
-        
+        cur.execute("SELECT contenu FROM contenu")
+        contenus = [row[0] for row in cur.fetchall()]
+    return render_template('index.html', contenus=contenus)
 
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    """Page contact avec formulaire d'ajout de contenu"""
+    if request.method == 'POST':
+        contenu = request.form.get('contenu')
+        if contenu:
+            with sqlite3.connect(DATABASE) as conn:
+                cur = conn.cursor()
+                cur.execute("INSERT INTO contenu (contenu) VALUES (?)", (contenu,))
+                conn.commit()
         return redirect(url_for('index'))
+    return render_template('contact.html')
 
 
-
-@app.route("/api/repos")  # ← exactement ce chemin
-def repos():
-    url = "https://api.github.com/users/CocoCatDev/repos"
+@app.route("/api/repos")
+def api_repos():
+    """API pour récupérer les repos GitHub non-fork"""
+    url = f"https://api.github.com/users/{GITHUB_USER}/repos"
     headers = {"Accept": "application/vnd.github+json"}
 
     try:
         response = requests.get(url, headers=headers, timeout=5)
+        response.raise_for_status()
+        repos = response.json()
+        if not isinstance(repos, list):
+            return jsonify([])  # renvoie toujours un tableau
     except requests.RequestException as e:
         return jsonify({"error": str(e)}), 500
 
-    if response.status_code != 200:
-        return jsonify({"error": "Impossible de récupérer les repos"}), 500
-
-    repos = response.json()
-    filtered_repos = [r for r in repos if not r["fork"]]
+    filtered_repos = [r for r in repos if not r.get("fork")]
 
     result = [
         {
-            "name": r["name"],
-            "html_url": r["html_url"],
-            "stargazers_count": r["stargazers_count"],
+            "name": r.get("name"),
+            "html_url": r.get("html_url"),
+            "stargazers_count": r.get("stargazers_count", 0),
             "description": r.get("description", ""),
             "language": r.get("language", "")
         }
@@ -77,9 +78,5 @@ def repos():
     return jsonify(result)
 
 
-
-
-
-
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
