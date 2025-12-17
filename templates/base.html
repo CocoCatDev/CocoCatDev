@@ -8,9 +8,14 @@
 <body>
 
     {% block content %}{% endblock %}
-    <h1>Mes repos GitHub</h1>
+ 
+
+
+
 
     {% include "footer.html" %}
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </body>
 </html>

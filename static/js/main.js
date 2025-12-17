@@ -1,30 +1,65 @@
-fetch("/api/repos")
-  .then(response => response.json())
-  .then(repos => {
-    const container = document.getElementById("repo-list");
-    if (!container) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("repo-list");
+  const input = document.getElementById("recherche")
+  if (!container) return;
 
-    // Trier par étoiles (optionnel)
-    repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+  fetch("/api/repos")
+    .then(res => res.json())
+    .then(repos => {
+      repos.forEach(repo => {
+  const div = document.createElement("div"); // crée d'abord la div
+  div.className = "repo-card";
 
-    repos.forEach(repo => {
-      const div = document.createElement("div");
-      div.className = "repo-card";
 
-      div.innerHTML = `
-        <h3>
-          <a href="${repo.html_url}" target="_blank" rel="noopener">
-            ${repo.name}
-          </a>
-        </h3>
-        <p>${repo.description ?? "Pas de description"}</p>
-        <p>
-          🧠 ${repo.language ?? "N/A"} |
-          ⭐ ${repo.stargazers_count}
-        </p>
-      `;
+  div.innerHTML = `
+    <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+    <p>${repo.description || "Pas de description"}</p>
+    <p>⭐ ${repo.stargazers_count} | 🧠 ${repo.language || "N/A"}</p>
+  `;
 
-      container.appendChild(div);
-    });
-  })
-  .catch(error => console.error("Erreur API:", error));
+  // bouton like
+  const btnJaime = document.createElement("button");
+  
+  btnJaime.textContent = `❤️ 0`; // backticks pour interpréter le nombre
+  const divMessage = document.createElement("div");  
+  divMessage.className = "merki";
+  const merci = document.createElement("p");
+   
+  divMessage.appendChild(merci)
+ 
+    
+  
+
+  let likes = 0;
+  btnJaime.addEventListener('click', () => {
+    likes++;
+    btnJaime.textContent = `❤️ ${likes}`;
+    merci.textContent = "Merci à vous ! Tant d'amour";
+  });
+
+  
+
+  
+  div.appendChild(btnJaime);
+  div.appendChild(divMessage);
+
+  container.appendChild(div);
+});
+
+      input.addEventListener("input", () => {
+    const value = input.value.toLowerCase();
+
+    document.querySelectorAll(".repo-card").forEach(card => {
+    const title = card.querySelector("h3 a").textContent;
+    const desc = card.querySelector("p").textContent;
+
+    const match = title.toLowerCase().includes(value) || desc.toLowerCase().includes(value);
+
+    card.style.display = match ? "" : "none";
+
+        });
+
+      });
+    })
+    .catch(err => console.error("Erreur fetch repos :", err));
+});
