@@ -58,3 +58,34 @@ document.querySelectorAll("#skills-list li").forEach(li => {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+    card.addEventListener("click",(e) => {
+      if(e.target.closest(".js"))
+      {
+         card.classList.add("show-js");
+         card.classList.remove("show-py");
+         card.classList.remove("show-c");
+      }
+      else if(e.target.closest(".py"))
+      {
+        card.classList.add("show-py");
+        card.classList.remove("show-js");
+        card.classList.remove("show-c");
+      }
+      else if(e.target.closest(".c"))
+      {
+        card.classList.add("show-c");
+        card.classList.remove("show-js");
+        card.classList.remove("show-py");
+      }
+    });
+  });
+  
+
+});
+
+
+
+

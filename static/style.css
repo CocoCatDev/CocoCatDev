@@ -50,7 +50,7 @@ a {
 #nav_dessus{
   border: 4px solid #FF5733;
   padding: 10px;
-  color: #00FFFF;
+  background-color: white;
 }
 /* Mobile */
 .nav_dessus ul {
@@ -200,4 +200,31 @@ transition: opacity 0.8s ease-out transform 0.8s ease-out;
 
 #l1_id p {
   color:blue;
+}
+.card{
+  border:4px solid #FF5733;
+  padding:10px;
+  background-color: white;
+}
+.card-back,
+.card-back-p,
+.card-back-c {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.card.show-js .card-back {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.card.show-py .card-back-p {
+  max-height: 200px;
+  opacity: 1;
+}
+.card.show-c .card-back-c{
+  max-height: 200px;
+  opacity:1;
 }
