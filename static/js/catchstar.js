@@ -38,6 +38,8 @@ let gameOver = false;
 
 let nv = 1;
 
+let victoire = false;
+
 
 
 document.getElementById("gauche").addEventListener("click",() => {
@@ -170,6 +172,14 @@ function boucle()
     }
     if (vies < 5){
         nv = 1;
+    }
+
+    if (nv == 5)
+    {
+        victoire = true;
+        ctx.fillStyle = "black";
+        ctx.font = "bold 28px Arial";
+        ctx.fillText(`❤️❤️❤️❤️❤️ Tu as gagné ! : ${nv} : ${score} `,200,200);
     }
    
     
