@@ -21,11 +21,21 @@ let fake_ana = {
     height : 50
 };
 
+let vies_set = {
+    x : Math.random() * 360,
+    y : 0,
+    width : 35,
+    height : 35
+};
+
 let score = 0;
 
 let vies = 5;
 
 let vitesse = 2;
+
+let gameOver = false;
+
 
 
 document.getElementById("gauche").addEventListener("click",() => {
@@ -51,16 +61,24 @@ function drawFakeAna()
     ctx.fillRect(fake_ana.x,fake_ana.y,fake_ana.width,fake_ana.height);
 }
 
+function drawVies()
+{
+    ctx.fillStyle = "green";
+    ctx.fillRect(vies_set.x,vies_set.y,vies_set.width,vies_set.height);
+}
+
 function boucle()
 {
     ctx.clearRect(0,0, canvas.width,canvas.height);
     chat.x = Math.max(0, Math.min(chat.x,canvas.width - chat.width));
     drawAna();
     drawFakeAna();
+    drawVies();
     drawChat();
 
     ana.y += vitesse;
     fake_ana.y += vitesse;
+    vies_set.y += vitesse;
     if (ana.x < fake_ana.x + fake_ana.width &&
         ana.x + ana.width > fake_ana.x &&
         ana.y < fake_ana.y + fake_ana.height &&
@@ -68,15 +86,36 @@ function boucle()
     ) {
         ana.x = Math.random() * 360;
         ana.y = 0;
-        fake_ana.x = Math.random * 360;
+        fake_ana.x = Math.random() * 360;
         fake_ana.y = 0;
         }
+    if (ana.x < vies_set.x + vies_set.width &&
+        ana.x + ana.width > vies_set.x &&
+        ana.y < vies_set.y + vies_set.height &&
+        ana.y + ana.height > vies_set.height &&
+        fake_ana.x < vies_set.x + vies_set.width &&
+        fake_ana.x + fake_ana.width > vies_set.width &&
+        fake_ana.y < vies_set.y + vies_set.height &&
+        fake_ana.y + fake_ana.height > vies_set.y
+    )
+    {
+        ana.x = Math.random() * 360;
+        ana.y = 0;
+        fake_ana.x = Math.random() * 360;
+        fake_ana.y = 0;
+        vies_set.x = Math.random() * 360;
+        vies_set.y = 0;
+    }
     if (ana.x < chat.x + chat.width &&
         ana.x + ana.width > chat.x &&
         ana.y < chat.y + chat.height &&
-        ana.y + ana.height > chat.y
+        ana.y + ana.height > chat.y 
     ){
     score++;
+    if (score % 5 === 0)
+    {
+        vies++;
+    }
     ana.x = Math.random() * 360;
     ana.y = 0;
     fake_ana.x = Math.random() * 360;
@@ -89,6 +128,10 @@ function boucle()
         fake_ana.y + fake_ana.height > chat.y
     ) {
         score = 0;
+        if (score === 0)
+        {
+            vies -= 1;
+        }
         vitesse = 2;
         ana.x = Math.random() * 360;
         ana.y = 0;
@@ -97,8 +140,11 @@ function boucle()
     }
     if (ana.y >= canvas.height)
     {
-        ctx.fillText(`GameOver ! Score : ${score}`, 10, 30);
         score = 0;
+        if (score === 0){
+            vies -= 1;
+            
+        }
         vitesse = 2;
         ana.x = Math.random() * 360;
         ana.y = 0;
@@ -106,9 +152,26 @@ function boucle()
         fake_ana.y = 0;
 
     }
-    ctx.fillText(`Score : ${score}`, 10, 30);
+   
+    if (vies === 0)
+    {
+        gameOver = true;
+        ctx.fillStyle = "black";
+        ctx.font = "bold 28px Arial";
+        ctx.fillText("💔 Game Over",200,200);
+        return;
+
+    }
+    
+
+    
+    ctx.fillStyle = "green";
+    ctx.font = "bold 28px Arial";
+    ctx.fillText(`❤️ ${vies}`,150,30);
     ctx.fillStyle = "red";
     ctx.font = "bold 28px Arial";
+    ctx.fillText(`Score : ${score}`, 10, 30);
+    
     requestAnimationFrame(boucle);
 
 }
