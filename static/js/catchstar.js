@@ -80,15 +80,8 @@ function collision()
     ){
         // on gagne un point par ana catchée 
     score++;
-    // si le score est un multiple de cinq, la vie augmente, si la vie est un multiple de cinq, le niveau augmente
-    if (score % 5 === 0)
-    {
-        vies++;
-         if (vies % 5 === 0)
-    {
-        nv++;
-    }
-    }
+    
+    
     // on recrée les valeurs de ana et fake ana à celles de départ pour recommencer, on augmente la vitesse
     ana.x = Math.random() * 360;
     ana.y = 0;
@@ -139,6 +132,10 @@ function boucle()
 
     // garder le chat dans le canvas
     chat.x = Math.max(0, Math.min(chat.x,canvas.width - chat.width));
+
+    // si le niveau est un multiple de 5 on incrémente 1
+    nv = Math.min(Math.floor(score / 5) + 1, 5);
+
    
     // effet pluie et appel des fonctions dessins et collisions 
     ana.y += vitesse;
@@ -158,10 +155,7 @@ function boucle()
         return;
 
     }
-    // retour au niveau 1 si vies < 5
-    if (vies < 5){
-        nv = 1;
-    }
+   
     // la victoire 
     if (nv == 5)
     {
