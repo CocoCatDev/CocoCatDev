@@ -1,6 +1,8 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+
+
 let chat = {
     x : 100,
     y : 350,
@@ -73,7 +75,11 @@ function drawVies()
 
 function boucle()
 {
-    ctx.clearRect(0,0, canvas.width,canvas.height);
+    ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    
+    
     chat.x = Math.max(0, Math.min(chat.x,canvas.width - chat.width));
     drawAna();
     drawFakeAna();
@@ -164,7 +170,7 @@ function boucle()
     if (vies === 0)
     {
         gameOver = true;
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         ctx.font = "bold 28px Arial";
         ctx.fillText("💔 Game Over",200,200);
         return;
@@ -177,9 +183,9 @@ function boucle()
     if (nv == 5)
     {
         victoire = true;
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         ctx.font = "bold 28px Arial";
-        ctx.fillText(`❤️❤️❤️❤️❤️ Tu as gagné ! : ${nv} : ${score} `,200,200);
+        ctx.fillText(`❤️ Tu as gagné ! : ${nv} : ${score} `,10,200);
         return;
     }
    
@@ -194,7 +200,7 @@ function boucle()
     ctx.fillText(`Score : ${score}`, 10, 30);
     ctx.fillStyle = "yellow";
     ctx.font = "bold 28px Arial";
-    ctx.fillText(`Lvl : ${nv}`,220,30)
+    ctx.fillText(`Lvl : ${nv}`,220,30);
     
     requestAnimationFrame(boucle);
 

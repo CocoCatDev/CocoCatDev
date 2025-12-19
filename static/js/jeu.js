@@ -69,7 +69,8 @@ function boucleJeu() {
     }
 
     // Dessin
-    ctx.clearRect(0, 0, can.width, can.height);
+     ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
+    ctx.fillRect(0, 0, can.width, can.height);
     drawTuyeau();
     draw();
 
