@@ -152,6 +152,17 @@ function boucle()
         fake_ana.x = Math.random() * 360;
         fake_ana.y = 0;
     }
+    if (vies_set.x < chat.x + chat.width &&
+        vies_set.x + vies_set.width > chat.x &&
+        vies_set.y < chat.y + chat.height &&
+        vies_set.y + vies_set.height > chat.y
+    )
+    {
+        vies++;
+        vitesse -= 0.1;
+        vies_set.x = Math.random() * 360;
+        vies_set.y = 0;
+    }
     if (ana.y >= canvas.height)
     {
         score = 0;
@@ -166,13 +177,18 @@ function boucle()
         fake_ana.y = 0;
 
     }
+    if (vies_set.y > canvas.height) {
+    vies_set.x = Math.random() * (canvas.width - vies_set.width);
+    vies_set.y = 0;
+}
+
    
     if (vies === 0)
     {
         gameOver = true;
         ctx.fillStyle = "white";
         ctx.font = "bold 28px Arial";
-        ctx.fillText("💔 Game Over",200,200);
+        ctx.fillText("💔 Game Over",10,200);
         return;
 
     }
