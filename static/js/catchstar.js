@@ -21,6 +21,9 @@ let fake_ana = {
     height : 50
 };
 
+let dureeTotale = 5 * 60; // 5 minutes en secondes (10 * 60 si tu veux)
+let tempsRestant = dureeTotale;
+let lastTime = performance.now();
 
 let score = 0;
 
@@ -124,11 +127,35 @@ function collision()
    
 }
 
-function boucle()
+function formatTemps(t) {
+    const min = Math.floor(t / 60);
+    const sec = Math.floor(t % 60);
+    return `${min}:${sec.toString().padStart(2, "0")}`;
+}
+
+
+function boucle(timestamp)
 {
+    const delta = (timestamp - lastTime) / 1000;
+    lastTime = timestamp;
+
+    if (!gameOver && !victoire) {
+        tempsRestant -= delta;
+        tempsRestant = Math.max(0, tempsRestant);
+    }
+    if (tempsRestant <= 0) {
+    gameOver = true;
+}
+    if (tempsRestant < 60) {
+    vitesse = Math.max(vitesse, 6);
+}
+
+
     // canvas peint en noir 
     ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      
 
     // garder le chat dans le canvas
     chat.x = Math.max(0, Math.min(chat.x,canvas.width - chat.width));
@@ -165,7 +192,10 @@ function boucle()
         ctx.fillText(`❤️ Tu as gagné ! : ${nv} : ${score} `,10,200);
         return;
     }
-    
+    ctx.fillStyle = tempsRestant < 30 ? "red" : "white";
+    ctx.font = "bold 24px Arial";
+    ctx.fillText(`⏱ ${formatTemps(tempsRestant)}`, 10, 60);
+
     ctx.fillStyle = "green";
     ctx.font = "bold 28px Arial";
     ctx.fillText(`❤️ ${vies}`,150,30);
@@ -180,6 +210,6 @@ function boucle()
 
 }
 
-boucle();
+requestAnimationFrame(boucle);
 
 
