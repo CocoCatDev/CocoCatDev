@@ -180,6 +180,7 @@ function boucle()
         ctx.fillStyle = "black";
         ctx.font = "bold 28px Arial";
         ctx.fillText(`❤️❤️❤️❤️❤️ Tu as gagné ! : ${nv} : ${score} `,200,200);
+        return;
     }
    
     
@@ -193,7 +194,7 @@ function boucle()
     ctx.fillText(`Score : ${score}`, 10, 30);
     ctx.fillStyle = "yellow";
     ctx.font = "bold 28px Arial";
-    ctx.fillText(`Niveau : ${nv}`,250,30)
+    ctx.fillText(`Lvl : ${nv}`,220,30)
     
     requestAnimationFrame(boucle);
 
