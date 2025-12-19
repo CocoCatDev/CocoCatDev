@@ -36,6 +36,8 @@ let vitesse = 2;
 
 let gameOver = false;
 
+let nv = 1;
+
 
 
 document.getElementById("gauche").addEventListener("click",() => {
@@ -115,6 +117,10 @@ function boucle()
     if (score % 5 === 0)
     {
         vies++;
+         if (vies % 5 === 0)
+    {
+        nv++;
+    }
     }
     ana.x = Math.random() * 360;
     ana.y = 0;
@@ -162,6 +168,10 @@ function boucle()
         return;
 
     }
+    if (vies < 5){
+        nv = 1;
+    }
+   
     
 
     
@@ -171,6 +181,9 @@ function boucle()
     ctx.fillStyle = "red";
     ctx.font = "bold 28px Arial";
     ctx.fillText(`Score : ${score}`, 10, 30);
+    ctx.fillStyle = "yellow";
+    ctx.font = "bold 28px Arial";
+    ctx.fillText(`Niveau : ${nv}`,250,30)
     
     requestAnimationFrame(boucle);
 
