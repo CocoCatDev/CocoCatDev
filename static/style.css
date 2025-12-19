@@ -228,3 +228,21 @@ transition: opacity 0.8s ease-out transform 0.8s ease-out;
   max-height: 200px;
   opacity:1;
 }
+.btn-jeu {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(90deg, #1e90ff, #00bfff);
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-jeu:hover {
+  background: linear-gradient(90deg, #00bfff, #1e90ff);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
