@@ -43,7 +43,7 @@ let invincible = false;
 
 let invincibleTime = 0;
 
-const INVINCIBLE_DUREE = 10;
+const INVINCIBLE_DUREE = 5;
 
 let lastNv = 1;
 
@@ -231,12 +231,12 @@ function boucle(timestamp)
     }
    
     // la victoire 
-    if (nv == 5)
+    if (nv == 8)
     {
         victoire = true;
         ctx.fillStyle = "white";
         ctx.font = "bold 28px Arial";
-        ctx.fillText(`❤️ Tu as gagné ! : ${nv} : ${score} `,10,200);
+        ctx.fillText(`❤️ Tu as gagné ! niveau : ${nv} score : ${score} `,10,200);
         return;
     }
     ctx.fillStyle = tempsRestant < 30 ? "red" : "white";
