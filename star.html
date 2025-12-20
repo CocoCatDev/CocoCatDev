@@ -6,12 +6,81 @@
         <title>CatchStarJS</title>
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <link rel="icon" href="static/coco.ico.png">
+         <style>
+            /* Body centré et plein écran */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Canvas responsive */
+canvas {
+    width: 90vw;
+    max-width: 400px;
+    height: 60vh;
+    background: black;
+    display: block;
+    margin-top: 20px;
+    border: 2px solid #555;
+    border-radius: 10px;
+}
+
+/* Container pour les boutons */
+#btn {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+/* Boutons stylisés */
+#btn button {
+    padding: 20px 30px;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 12px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    min-width: 80px;
+}
+
+/* Feedback au clic */
+#btn button:active {
+    transform: scale(0.95);
+    background-color: #555;
+}
+
+/* Responsive pour très petits écrans */
+@media (max-width: 350px) {
+    #btn button {
+        padding: 15px 20px;
+        font-size: 22px;
+        min-width: 60px;
+    }
+    canvas {
+        height: 50vh;
+    }
+}
+
+         </style>
     </head>
     <body>
         <canvas id="game" width="400" height="400"></canvas>
         <div id="btn">
-            <button id="gauche">Gauche</button>
-            <button id="droite">Droite</button>
+            <button id="gauche">⬅️</button>
+            <button id="droite">➡️</button>
+
         </div>
     </body>
 </html>
