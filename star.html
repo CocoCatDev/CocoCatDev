@@ -4,94 +4,104 @@
         <meta charset="utf-8">
         <script src="static/js/catchstar.js" defer></script>
         <title>CatchStarJS</title>
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link rel="icon" href="static/coco.ico.png">
-         <style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="static/coco.ico.png">
+        <style>
             /* Body centré et plein écran */
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: #000;
-    color: white;
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    overflow: hidden;
-}
+            body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                background-color: #000;
+                color: white;
+                font-family: Arial, sans-serif;
+                height: 100vh;
+                overflow: hidden;
+            }
 
-/* Canvas responsive */
-canvas {
-    width: 90vw;
-    max-width: 400px;
-    height: 60vh;
-    background: black;
-    display: block;
-    margin-top: 20px;
-    border: 2px solid #555;
-    border-radius: 10px;
-}
+            /* Canvas responsive */
+            canvas {
+                width: 90vw;
+                max-width: 400px;
+                height: 60vh;
+                background: black;
+                display: block;
+                margin-top: 20px;
+                border: 2px solid #555;
+                border-radius: 10px;
+            }
 
-/* Container pour les boutons */
-#arrows {
-    display: flex;
-    gap: 20px;
-}
+            /* Container pour les boutons */
+            #arrows {
+                display: flex;
+                gap: 20px;
+                margin-top: 10px;
+            }
 
-/* Play / Replay horizontal ou vertical selon l’écran */
-#play-controls {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
+            /* Play / Replay / Facile */
+            #play-controls {
+                display: flex;
+                gap: 20px;
+                flex-wrap: wrap; /* Permet le retour à la ligne automatique */
+                margin-top: 10px;
+                justify-content: center; /* Centrer les boutons */
+            }
 
-/* Style commun aux boutons */
-#controls button {
-    padding: 20px 30px;
-    font-size: 28px;
-    font-weight: bold;
-    border-radius: 12px;
-    border: none;
-    background-color: #333;
-    color: white;
-    cursor: pointer;
-    transition: all 0.1s ease;
-    min-width: 80px;
-}
+            /* Style commun aux boutons */
+            #controls button {
+                padding: 20px 30px;
+                font-size: 28px;
+                font-weight: bold;
+                border-radius: 12px;
+                border: none;
+                background-color: #333;
+                color: white;
+                cursor: pointer;
+                transition: all 0.1s ease;
+                min-width: 80px;
+            }
 
-#controls button:active {
-    transform: scale(0.95);
-    background-color: #555;
-}
+            #controls button:active {
+                transform: scale(0.95);
+                background-color: #555;
+            }
 
-/* Responsive pour petits écrans */
-@media (max-width: 350px) {
-    #controls button {
-        padding: 15px 20px;
-        font-size: 22px;
-        min-width: 60px;
-    }
-}
+            /* Responsive pour petits écrans */
+            @media (max-width: 400px) {
+                #controls button {
+                    padding: 15px 20px;
+                    font-size: 22px;
+                    min-width: 60px;
+                }
+            }
 
-         </style>
+            @media (max-width: 350px) {
+                #play-controls {
+                    gap: 10px;
+                }
+            }
+
+        </style>
     </head>
     <body>
         <canvas id="game" width="400" height="400"></canvas>
         <div id="controls">
-    <!-- Flèches de déplacement -->
-    <div id="arrows">
-        <button id="gauche">⬅️</button>
-        <button id="droite">➡️</button>
-    </div>
+            <!-- Flèches de déplacement -->
+            <div id="arrows">
+                <button id="gauche">⬅️</button>
+                <button id="droite">➡️</button>
+            </div>
 
-    <!-- Play / Replay -->
-    <div id="play-controls">
-        <button id="play">▶️ Play</button>
-        <button id="replay">🔁 Rejouer</button>
-    </div>
-</div>
-
+            <!-- Play / Replay / Facile -->
+            <div id="play-controls">
+                <button id="play">▶️ Play</button>
+                <button id="replay">🔁 Rejouer</button>
+                <button id="facile">✌️ Facile</button>
+                <button id="replayfacile">🔁 Rejouer Facile</button>
+            </div>
+        </div>
     </body>
 </html>
