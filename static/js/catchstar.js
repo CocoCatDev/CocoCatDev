@@ -47,6 +47,8 @@ const INVINCIBLE_DUREE = 10;
 
 let lastNv = 1;
 
+let lastVies = vies;
+
 document.getElementById("gauche").addEventListener("click",() => {
     chat.x -= 40;
 });
@@ -109,12 +111,16 @@ function collision()
     vitesse += 0.3;
     }
     // si chat entre en collision avec fake ana le score = 0 et il perd une vie
-    if (!invincible &&
-        fake_ana.x < chat.x + chat.width &&
+    if (fake_ana.x < chat.x + chat.width &&
         fake_ana.x + fake_ana.width > chat.x &&
         fake_ana.y < chat.y + chat.height &&
         fake_ana.y + fake_ana.height > chat.y
     ) {
+           if (invincible) {
+        fake_ana.y = 0;
+        fake_ana.x = Math.random() * 360;
+        return;
+    }
         score = 0;
         if (score === 0)
         {
@@ -128,10 +134,17 @@ function collision()
         fake_ana.y = 0;
     }
     // si ana tombe, score à zero, moins une vie, ...
-    if (!invincible &&
-        ana.y >= canvas.height)
-    {
-        score = 0;
+    if (ana.y >= canvas.height)
+   
+   {    
+          if (invincible) {
+        ana.y = 0;
+        ana.x = Math.random() * 360;
+        return;
+    
+          }
+       
+    score = 0;
         
         vies -= 1;
             
@@ -194,7 +207,10 @@ function boucle(timestamp)
             invincible = false;
         }
     }
-   
+   if (!invincible){
+    lastNv = nv;
+    lastVies = vies;
+   }
     // effet pluie et appel des fonctions dessins et collisions 
     ana.y += vitesse;
     fake_ana.y += vitesse;
