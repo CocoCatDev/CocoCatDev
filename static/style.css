@@ -246,3 +246,12 @@ transition: opacity 0.8s ease-out transform 0.8s ease-out;
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
+#skills-list {
+  flex-direction: column !important;
+}
+.games {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
