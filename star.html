@@ -35,14 +35,20 @@ canvas {
 }
 
 /* Container pour les boutons */
-#btn {
-    margin-top: 20px;
+#arrows {
     display: flex;
     gap: 20px;
 }
 
-/* Boutons stylisés */
-#btn button {
+/* Play / Replay horizontal ou vertical selon l’écran */
+#play-controls {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Style commun aux boutons */
+#controls button {
     padding: 20px 30px;
     font-size: 28px;
     font-weight: bold;
@@ -55,21 +61,17 @@ canvas {
     min-width: 80px;
 }
 
-/* Feedback au clic */
-#btn button:active {
+#controls button:active {
     transform: scale(0.95);
     background-color: #555;
 }
 
-/* Responsive pour très petits écrans */
+/* Responsive pour petits écrans */
 @media (max-width: 350px) {
-    #btn button {
+    #controls button {
         padding: 15px 20px;
         font-size: 22px;
         min-width: 60px;
-    }
-    canvas {
-        height: 50vh;
     }
 }
 
@@ -77,12 +79,19 @@ canvas {
     </head>
     <body>
         <canvas id="game" width="400" height="400"></canvas>
-        <div id="btn">
-            <button id="gauche">⬅️</button>
-            <button id="droite">➡️</button>
-             <button id="play">▶️ Play</button>
-             <button id="replay">🔁</button>
+        <div id="controls">
+    <!-- Flèches de déplacement -->
+    <div id="arrows">
+        <button id="gauche">⬅️</button>
+        <button id="droite">➡️</button>
+    </div>
 
-        </div>
+    <!-- Play / Replay -->
+    <div id="play-controls">
+        <button id="play">▶️ Play</button>
+        <button id="replay">🔁 Rejouer</button>
+    </div>
+</div>
+
     </body>
 </html>
