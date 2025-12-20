@@ -210,6 +210,23 @@ function boucle(timestamp)
 
 }
 
-requestAnimationFrame(boucle);
+document.getElementById("play").addEventListener("click",() => {
+    requestAnimationFrame(boucle);
 
-
+});
+document.getElementById("replay").addEventListener("click", () => {
+    // Réinitialisation du jeu
+    score = 0;
+    vies = 5;
+    vitesse = 2;
+    nv = 1;
+    victoire = false;
+    gameOver = false;
+    ana.x = Math.random() * 360;
+    ana.y = 0;
+    fake_ana.x = Math.random() * 360;
+    fake_ana.y = 0;
+    tempsRestant = dureeTotale;
+    
+    requestAnimationFrame(boucle);
+});
