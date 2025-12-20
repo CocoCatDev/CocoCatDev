@@ -1,6 +1,8 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+let jeuLance = false;
+
 let chat = {
     x : 100,
     y : 350,
@@ -37,6 +39,14 @@ let nv = 1;
 
 let victoire = false;
 
+let invincible = false;
+
+let invincibleTime = 0;
+
+const INVINCIBLE_DUREE = 10;
+
+let lastNv = 1;
+
 document.getElementById("gauche").addEventListener("click",() => {
     chat.x -= 40;
 });
@@ -44,11 +54,17 @@ document.getElementById("droite").addEventListener("click",() => {
     chat.x += 40;
 });
 
-function drawChat()
-{
-    ctx.fillStyle = "grey";
-    ctx.fillRect(chat.x,chat.y,chat.width,chat.height);
+function drawChat() {
+    // effet clignotant
+    if (invincible && Math.floor(performance.now() / 100) % 2 === 0) {
+        return;
+    }
+
+    ctx.fillStyle = invincible ? "cyan" : "grey";
+    ctx.fillRect(chat.x, chat.y, chat.width, chat.height);
 }
+
+
 function drawAna()
 {
     ctx.fillStyle = "yellow";
@@ -93,7 +109,8 @@ function collision()
     vitesse += 0.3;
     }
     // si chat entre en collision avec fake ana le score = 0 et il perd une vie
-    if (fake_ana.x < chat.x + chat.width &&
+    if (!invincible &&
+        fake_ana.x < chat.x + chat.width &&
         fake_ana.x + fake_ana.width > chat.x &&
         fake_ana.y < chat.y + chat.height &&
         fake_ana.y + fake_ana.height > chat.y
@@ -111,7 +128,8 @@ function collision()
         fake_ana.y = 0;
     }
     // si ana tombe, score à zero, moins une vie, ...
-    if (ana.y >= canvas.height)
+    if (!invincible &&
+        ana.y >= canvas.height)
     {
         score = 0;
         
@@ -162,7 +180,20 @@ function boucle(timestamp)
 
     // si le niveau est un multiple de 5 on incrémente 1
     nv = Math.min(Math.floor(score / 5) + 1, 5);
+    if (nv > lastNv)
+    {
+        invincible = true;
+        invincibleTime = INVINCIBLE_DUREE;
+    }
+    lastNv = nv;
 
+    if (invincible)
+    {
+        invincibleTime -= delta;
+        if (invincibleTime <= 0){
+            invincible = false;
+        }
+    }
    
     // effet pluie et appel des fonctions dessins et collisions 
     ana.y += vitesse;
@@ -211,22 +242,28 @@ function boucle(timestamp)
 }
 
 document.getElementById("play").addEventListener("click",() => {
-    requestAnimationFrame(boucle);
+    if (!jeuLance){
+        jeuLance =true;
+        lastTime = performance.now();
+        requestAnimationFrame(boucle);
+
+    }
 
 });
 document.getElementById("replay").addEventListener("click", () => {
-    // Réinitialisation du jeu
     score = 0;
     vies = 5;
     vitesse = 2;
     nv = 1;
+    lastNv = 1;
     victoire = false;
     gameOver = false;
-    ana.x = Math.random() * 360;
-    ana.y = 0;
-    fake_ana.x = Math.random() * 360;
-    fake_ana.y = 0;
+    invincible = false;
+    invincibleTime = 0;
     tempsRestant = dureeTotale;
-    
+    ana.y = 0;
+    fake_ana.y = 0;
+
+    lastTime = performance.now();
     requestAnimationFrame(boucle);
 });
