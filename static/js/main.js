@@ -86,6 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
+document.addEventListener("DOMContentLoaded",() => {
+  btn = document.getElementById("bouton");
+  content = document.querySelector(".games");
+  btn.addEventListener("click",() => {
+    content.classList.toggle("show");
+  });
+});
 
 
